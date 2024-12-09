@@ -1,0 +1,50 @@
+.log-display {
+  background-color: #f8f9fa;
+  border: 2px solid #17a2b8;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.log-display h2 {
+  color: #17a2b8;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.log-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.log-item {
+  background-color: #e9ecef;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #495057;
+  transition: background-color 0.3s ease;
+}
+
+.log-item:nth-child(even) {
+  background-color: #f1f3f5;
+}
+
+.log-item:hover {
+  background-color: #dee2e6;
+}
+
+.log-item.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.log-item.success {
+  background-color: #d4edda;
+  color: #155724;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ConfigurationForm from "./components/ConfigurationForm";
-import TicketDisplay from "./components/TicketDisplay";
+import TicketDisplayPage from "./components/TicketDisplayPage"; // Updated import for combined page
 import "./App.css";
 
 function App() {
@@ -14,8 +14,19 @@ function App() {
           <h1>Ticket Booking System</h1>
         </header>
         <Routes>
-          <Route path="/" element={<ConfigurationForm setSimulationRunning={setSimulationRunning} />} />
-          <Route path="/tickets" element={<TicketDisplay simulationRunning={simulationRunning} />} />
+          <Route
+            path="/"
+            element={<ConfigurationForm setSimulationRunning={setSimulationRunning} />}
+          />
+          <Route
+            path="/tickets"
+            element={
+              <TicketDisplayPage
+                simulationRunning={simulationRunning}
+                setSimulationRunning={setSimulationRunning}
+              />
+            }
+          />
         </Routes>
       </div>
     </Router>

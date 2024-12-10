@@ -90,6 +90,7 @@ function ConfigurationForm({ setSimulationRunning }) {
         </div>
         <button type="submit">Save Configuration</button>
       </form>
+      
     </div>
   );
 }

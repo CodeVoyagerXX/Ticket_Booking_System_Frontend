@@ -1,50 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import './LogDisplay.css';
 
 const LogDisplay = ({ simulationRunning }) => {
   const [logs, setLogs] = useState([]);
 
   useEffect(() => {
-    let intervalId;
-    
+    let ws;
     if (simulationRunning) {
-      intervalId = setInterval(() => {
-        // Simulated log fetch - replace with actual API call
-        fetch("http://localhost:8080/api/logs")
-          .then(response => response.json())
-          .then(data => {
-            setLogs(prevLogs => {
-              // Limit log history to last 100 entries
-              const updatedLogs = [...prevLogs, ...data.logs].slice(-100);
-              return updatedLogs;
-            });
-          })
-          .catch(error => console.error("Error fetching logs:", error));
-      }, 1000);
+      ws = new WebSocket("ws://localhost:8080/ws/tickets");
+
+      ws.onopen = () => console.log("WebSocket connected");
+      ws.onclose = () => console.log("WebSocket disconnected");
+      ws.onerror = (error) => console.error("WebSocket error:", error);
+
+      ws.onmessage = (event) => {
+        console.log("Received log:", event.data); // Print log in console
+        setLogs((prevLogs) => [...prevLogs, event.data].slice(-10));
+      };
     }
 
     return () => {
-      if (intervalId) clearInterval(intervalId);
+      if (ws) {
+        ws.close();
+        console.log("WebSocket closed");
+      }
     };
   }, [simulationRunning]);
 
   return (
-    <Card className="h-full">
-      <CardHeader>
-        <CardTitle>Simulation Logs</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[300px] w-full rounded-md border p-4">
+    <div className="log-display-container">
+      <h2 className="log-header">Real-Time Ticketing Logs</h2>
+      <div className="log-content">
+        <ul className="log-list">
           {logs.map((log, index) => (
-            <div key={index} className="text-sm py-1 border-b last:border-b-0">
-              {log}
-            </div>
+            <li key={index} className="log-item">{log}</li>
           ))}
-        </ScrollArea>
-      </CardContent>
-    </Card>
+        </ul>
+      </div>
+    </div>
   );
 };
 

@@ -3,12 +3,17 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    
   }
   
-  .ticket-display-section,
-  .control-panel-section,
-  .log-display-section {
+  .ticket-display-section{
     width: 80%;
+  }
+  .control-panel-section{
+    width: 80%;
+  }
+  .log-display-section {
+    width: 200%;
   }
   
   .start-button,

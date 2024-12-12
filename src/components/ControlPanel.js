@@ -15,9 +15,16 @@ const ControlPanel = ({ simulationRunning, setSimulationRunning, config }) => {
     }
   };
 
-  const handleStop = () => {
-    setSimulationRunning(false);
-    alert("Simulation stopped.");
+  const handleStop = async () => {
+    try {
+      // Send the stop simulation request to the backend
+      await axios.post("http://localhost:8080/api/stop-simulation");
+      setSimulationRunning(false);
+      alert("Simulation stopped successfully!");
+    } catch (error) {
+      console.error("Error stopping simulation:", error);
+      alert("Failed to stop the simulation.");
+    }
   };
 
   return (

@@ -1,45 +1,49 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import './ControlPanel.css';
+import axios from "axios";
+import "./ControlPanel.css";
 
-const ControlPanel = ({ 
-  onStart, 
-  onStop, 
-  simulationRunning 
-}) => {
-  const handleStart = () => {
-    onStart();
+const ControlPanel = ({ simulationRunning, setSimulationRunning, config }) => {
+  const handleStart = async () => {
+    try {
+      // Send the start simulation request to the backend with the config
+      await axios.post("http://localhost:8080/api/start-simulation", config);
+      setSimulationRunning(true);
+      alert("Simulation started successfully!");
+    } catch (error) {
+      console.error("Error starting simulation:", error);
+      alert("Failed to start the simulation.");
+    }
   };
 
-  const handleStop = () => {
-    onStop();
+  const handleStop = async () => {
+    try {
+      // Send the stop simulation request to the backend
+      await axios.post("http://localhost:8080/api/stop-simulation");
+      setSimulationRunning(false);
+      alert("Simulation stopped successfully!");
+    } catch (error) {
+      console.error("Error stopping simulation:", error);
+      alert("Failed to stop the simulation.");
+    }
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Simulation Control</CardTitle>
-      </CardHeader>
-      <CardContent className="flex space-x-4">
-        <Button 
-          onClick={handleStart} 
-          variant="default" 
-          className="flex-1"
-          disabled={simulationRunning}
-        >
-          Start Simulation
-        </Button>
-        <Button 
-          onClick={handleStop} 
-          variant="destructive" 
-          className="flex-1"
-          disabled={!simulationRunning}
-        >
-          Stop Simulation
-        </Button>
-      </CardContent>
-    </Card>
+    <div className="control-panel">
+      <button
+        onClick={handleStart}
+        disabled={simulationRunning}
+        className="start-button"
+      >
+        Start Simulation
+      </button>
+      <button
+        onClick={handleStop}
+        disabled={!simulationRunning}
+        className="stop-button"
+      >
+        Stop Simulation
+      </button>
+    </div>
   );
 };
 

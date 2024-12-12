@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
 }
 
 .configuration-form {
@@ -15,6 +16,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
+  margin-top:2%;
 }
 .configuration-form h2 {
   color:#282c34;
@@ -75,6 +77,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
   border-radius: 10px;
+  padding:15px;
+  margin-top: 2%;
 }
 
 .App-link {

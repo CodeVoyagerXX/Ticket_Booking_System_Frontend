@@ -8,6 +8,10 @@ function ConfigurationForm({ setSimulationRunning }) {
     ticketReleaseRate: "",
     customerRetrievalRate: "",
     maxTicketCapacity: "",
+    numberOfVendors: "",
+    numberOfCustomers: "",
+    eventName: "",
+    ticketPrice: "",
   });
 
   const navigate = useNavigate();
@@ -52,6 +56,7 @@ function ConfigurationForm({ setSimulationRunning }) {
             name="totalTickets"
             value={formData.totalTickets}
             onChange={handleChange}
+            min="0"
             required
           />
         </div>
@@ -63,6 +68,7 @@ function ConfigurationForm({ setSimulationRunning }) {
             name="ticketReleaseRate"
             value={formData.ticketReleaseRate}
             onChange={handleChange}
+            min="0"
             required
           />
         </div>
@@ -74,6 +80,7 @@ function ConfigurationForm({ setSimulationRunning }) {
             name="customerRetrievalRate"
             value={formData.customerRetrievalRate}
             onChange={handleChange}
+            min="0"
             required
           />
         </div>
@@ -85,6 +92,54 @@ function ConfigurationForm({ setSimulationRunning }) {
             name="maxTicketCapacity"
             value={formData.maxTicketCapacity}
             onChange={handleChange}
+            min="0"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="numberOfVendors">Number Of Vendors:</label>
+          <input
+            type="number"
+            id="numberOfVendors"
+            name="numberOfVendors"
+            value={formData.numberOfVendors}
+            onChange={handleChange}
+            min="0"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="numberOfCustomers">Number Of Customers:</label>
+          <input
+            type="number"
+            id="numberOfCustomers"
+            name="numberOfCustomers"
+            value={formData.numberOfCustomers}
+            onChange={handleChange}
+            min="0"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="eventName">Event Name:</label>
+          <input
+            type="text"
+            id="eventName"
+            name="eventName"
+            value={formData.eventName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="ticketPrice">Ticket Price:</label>
+          <input
+            type="number"
+            id="ticketPrice"
+            name="ticketPrice"
+            value={formData.ticketPrice}
+            onChange={handleChange}
+            min="0"
             required
           />
         </div>
